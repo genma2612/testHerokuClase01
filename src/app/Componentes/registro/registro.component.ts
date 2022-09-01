@@ -33,6 +33,7 @@ export class RegistroComponent implements OnInit {
        this.listadoDeUsuarios.push(usuarioNuevo);
  
        this.guardar();
+       console.log("Registrado exitosamente");
  
      }
    }

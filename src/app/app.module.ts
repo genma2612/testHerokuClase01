@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { RegistroComponent } from './Componentes/registro/registro.component';
 import { AboutComponent } from './Componentes/about/about.component';
 import { NavbarComponent } from './Componentes/navbar/navbar.component';
+import { FooterComponent } from './Componentes/footer/footer.component';
+
+import { HttpClientModule } from '@angular/common/http'; //para api github
 
 @NgModule({
   declarations: [
@@ -19,12 +22,14 @@ import { NavbarComponent } from './Componentes/navbar/navbar.component';
     LoginComponent,
     RegistroComponent,
     AboutComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule //para Api Github
   ],
   providers: [],
   bootstrap: [AppComponent]

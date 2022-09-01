@@ -1,1 +1,18 @@
-<p>{{misDatos}}</p>
+<!---
+<p>{{info.name}}</p>
+<P>{{info.location}}</P>
+<P>{{info.html_url}}</P>
+<P>{{info.bio}}</P>
+<P>{{info.created_at}}</P>
+<P><img src="{{info.avatar_url}}" alt="foro de perfil"></P>
+-->
+
+<div class="card">
+    <img src="{{info.avatar_url}}" alt="John" style="width:100%">
+    <h2>{{info.name}}</h2>
+    <p class="title">{{info.location}}</p>
+    <p>{{info.bio}}</p>
+    <p>Registrado el {{info.created_at | date:'dd/MM/YYYY'}}</p>
+    <a href="#"><i class="fa fa-dribbble"></i></a>
+    <p><button (click)="irAPagina()">Github</button></p>
+  </div>
