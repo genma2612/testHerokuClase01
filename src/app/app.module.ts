@@ -7,13 +7,19 @@ import { BienvenidoComponent } from './Componentes/bienvenido/bienvenido.compone
 import { ErrorComponent } from './Componentes/error/error.component';
 import { LoginComponent } from './Componentes/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { RegistroComponent } from './Componentes/registro/registro.component';
+import { AboutComponent } from './Componentes/about/about.component';
+import { NavbarComponent } from './Componentes/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BienvenidoComponent,
     ErrorComponent,
-    LoginComponent
+    LoginComponent,
+    RegistroComponent,
+    AboutComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
