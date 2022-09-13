@@ -5,12 +5,17 @@ import { BienvenidoComponent } from './Componentes/bienvenido/bienvenido.compone
 import { ErrorComponent } from './Componentes/error/error.component';
 import { RegistroComponent } from './Componentes/registro/registro.component';
 import { AboutComponent } from './Componentes/about/about.component';
+import { PagePadreComponent } from './ejemploInputOutput/page/page-padre/page-padre.component';
+import { HomeComponent } from './Componentes/home/home.component';
 
 const routes: Routes = [
+  { path:"InputOuput", component:PagePadreComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: "registro", component: RegistroComponent },
   { path: "login", component: LoginComponent },
   { path: "about", component: AboutComponent },
-  { path: "", component: BienvenidoComponent },
+  { path: "bienvenida", component: BienvenidoComponent },
+  { path: "", component: HomeComponent },
   { path: "**", component: ErrorComponent }
 ];
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/Servicios/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -7,12 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroComponent implements OnInit {
 
-  nombre="";
+  mail="";
   clave="";
   copiaClave="";
   listadoDeUsuarios:any[]=[];
 
-  constructor() {
+  constructor(public authService: AuthService) {
+
+   }
+
+
+  /*
+  constructor(public authService: AuthService) {
     let datosGuardados;
     datosGuardados=localStorage.getItem("listadoDeUsuarios");
     if(datosGuardados!=null)
@@ -41,7 +48,7 @@ export class RegistroComponent implements OnInit {
    {
        localStorage.setItem("listadoDeUsuarios",JSON.stringify(this.listadoDeUsuarios));
    }
-
+   */
   ngOnInit(): void {
   }
 
