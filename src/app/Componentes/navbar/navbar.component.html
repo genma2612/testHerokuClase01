@@ -54,10 +54,16 @@
           </li>
         </ul>
         <ul class="d-flex navbar-nav">
-          <div *ngIf="authService.isAuthenticatedObs | async then thenBlock else elseBlock"></div>
+          <div *ngIf="authService.isLoggedIn then thenBlock else elseBlock"></div>
           <ng-template #thenBlock>
-            {{nombreUsuario}}
-            <button class="btn btn-danger" type="button" (click)="authService.SignOut()" >Salir</button>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{authService.userName}} 
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item toRight" (click)="authService.SignOut()">Salir</a></li>
+              </ul>
+            </li>
           </ng-template>
           <ng-template #elseBlock>
             <li class="nav-item">

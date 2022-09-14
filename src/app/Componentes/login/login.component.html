@@ -14,4 +14,10 @@
       <button class="w-100 btn btn-lg btn-primary" (click)="authService.SignIn(userName.value, userPassword.value)">Loguear</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
     </form>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-primary" (click)="authService.SignIn(usuariosDePrueba[0].email, usuariosDePrueba[0].pass)">Manuel</button>
+      <button type="button" class="btn btn-primary" (click)="authService.SignIn(usuariosDePrueba[1].email, usuariosDePrueba[1].pass)">Raul</button>
+      <button type="button" class="btn btn-primary" (click)="authService.SignIn(usuariosDePrueba[2].email, usuariosDePrueba[2].pass)">Felipe</button>
+    </div>
   </main>

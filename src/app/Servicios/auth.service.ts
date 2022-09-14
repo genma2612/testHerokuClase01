@@ -1,4 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
+import Swal from 'sweetalert2'
 import { User } from '../Servicios/user';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -14,10 +15,6 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   userData: any; // Save logged in user data
-    //test observable
-    private _isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    public isAuthenticatedObs: Observable<boolean> = this._isAuthenticatedSubject.asObservable();
-  //
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -45,7 +42,6 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this._isAuthenticatedSubject.next(true) //obs
             this.router.navigate(['/bienvenida']);
           }
         });
@@ -95,6 +91,12 @@ export class AuthService {
   //  Sin verificacion
   //  return user !== null && user.emailVerified !== false ? true : false;
   }
+    get userName(): string {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user.email;
+  //  Sin verificacion
+  //  return user !== null && user.emailVerified !== false ? true : false;
+  }
   // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
@@ -135,7 +137,6 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this._isAuthenticatedSubject.next(false) //obs
       this.router.navigate(['login']);
     });
   }

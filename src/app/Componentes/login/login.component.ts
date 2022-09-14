@@ -13,6 +13,10 @@ import { BienvenidoComponent } from '../bienvenido/bienvenido.component';
 })
 export class LoginComponent implements OnInit {
 
+  usuariosDePrueba = [{email:"manuel.gonzalez@sarasa.com",pass:"123456"},
+                      {email:"raul.gonzalez@sarasa.com",pass:"123456"},
+                      {email:"felipe.gonzalez@sarasa.com",pass:"123456"}];
+
   constructor(public authService: AuthService){
 
   }
