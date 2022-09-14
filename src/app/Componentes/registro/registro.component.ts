@@ -45,7 +45,7 @@ export class RegistroComponent implements OnInit {
         icon: 'success',
         title: "Usuario registrado correctamente"
       });
-      this.router.navigate(['/bienvenida']);
+      this.router.navigate(['/home']);
       })
     .catch((x)=> { 
       this.Toast.fire({

@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
         icon: 'success',
         title: "Usuario logueado correctamente"
       });
-      this.router.navigate(['/bienvenida']);
+      this.router.navigate(['/home']);
       })
     .catch((x)=> { 
       this.Toast.fire({
