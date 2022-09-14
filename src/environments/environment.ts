@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebase: {
+  firebaseConfig : {
     apiKey: "AIzaSyDITkV0FhZYuoVF-w9k2caiEEr_G2_KYK8",
     authDomain: "tp-sala-de-juegos-461bc.firebaseapp.com",
     databaseURL: "https://tp-sala-de-juegos-461bc-default-rtdb.firebaseio.com",

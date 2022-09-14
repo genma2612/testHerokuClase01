@@ -1,3 +1,4 @@
+import { User } from './../../Servicios/user';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, Router, RouterLinkWithHref } from '@angular/router';
 import { AuthService } from 'src/app/Servicios/auth.service';
@@ -5,6 +6,8 @@ import { delay } from 'rxjs';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import Swal from 'sweetalert2'
 import { BienvenidoComponent } from '../bienvenido/bienvenido.component';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 @Component({
   selector: 'app-login',
@@ -17,7 +20,13 @@ export class LoginComponent implements OnInit {
                       {email:"raul.gonzalez@sarasa.com",pass:"123456"},
                       {email:"felipe.gonzalez@sarasa.com",pass:"123456"}];
 
-  constructor(public authService: AuthService){
+  firebaseErrors:any = {
+    'auth/user-not-found': 'No se encuentra el email',
+    'auth/invalid-email': 'El correo ingresado no tiene el formato correcto',
+    'auth/wrong-password': 'Contraseña incorrecta'
+  }; // list of firebase error codes to alternate error messages
+
+  constructor(public authService: AuthService, public router: Router, public fs: AngularFirestore){
 
   }
 
@@ -41,6 +50,32 @@ export class LoginComponent implements OnInit {
     }
   })
 
+  loguear(email:string, pass:string){
+    this.authService.SignIn(email,pass)
+    .then(() => {
+      this.Toast.fire({
+        icon: 'success',
+        title: "Usuario logueado correctamente"
+      });
+      this.router.navigate(['/bienvenida']);
+      })
+    .catch((x)=> { 
+      this.Toast.fire({
+        icon: 'error',
+        title: this.firebaseErrors[x.code] || x.code
+      });
+    }
+      );
+  }
+
+
+
+
+
+
+
+
+  /*
   dameUsuarios() {
     let listadoGuardado;
     listadoGuardado = localStorage.getItem("listadoDeUsuarios");
@@ -86,5 +121,6 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+  */
 
 }

@@ -18,7 +18,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/environment';
 //ejemplo de iput/output
 import { PagePadreComponent } from './ejemploInputOutput/page/page-padre/page-padre.component';
 import { ComponenteAltaComponent } from './ejemploInputOutput/componente/componente-alta/componente-alta.component';
@@ -45,7 +45,7 @@ import { AuthService } from './Servicios/auth.service';
     HomeComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

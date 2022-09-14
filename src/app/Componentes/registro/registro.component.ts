@@ -1,5 +1,8 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Servicios/auth.service';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-registro',
@@ -13,9 +16,45 @@ export class RegistroComponent implements OnInit {
   copiaClave="";
   listadoDeUsuarios:any[]=[];
 
-  constructor(public authService: AuthService) {
+  firebaseErrors:any = {
+    'auth/email-already-in-use': 'El correo ingresado ya se encuentra registrado',
+    'auth/invalid-email': 'El correo ingresado no tiene el formato correcto',
+    'auth/wrong-password': 'Contraseña incorrecta'
+  };
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
+  constructor(public authService: AuthService, public router: Router) {
 
    }
+
+   registrar(email:string, pass:string){
+    this.authService.SignUp(email,pass)
+    .then(() => {
+      this.Toast.fire({
+        icon: 'success',
+        title: "Usuario registrado correctamente"
+      });
+      this.router.navigate(['/bienvenida']);
+      })
+    .catch((x)=> { 
+      this.Toast.fire({
+        icon: 'error',
+        title: this.firebaseErrors[x.code] || x.code
+      });
+    }
+      );
+  }
 
 
   /*

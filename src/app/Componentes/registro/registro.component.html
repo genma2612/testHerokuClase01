@@ -14,7 +14,7 @@
         <input type="password" class="form-control" id="floatingPassword2" placeholder="Password2" [(ngModel)]="copiaClave" name="copiaClave">
         <label for="floatingPassword">Repita su contraseña:</label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" (click)="authService.SignUp(userMail.value, userClave.value)">Registrarse</button>
+      <button class="w-100 btn btn-lg btn-primary" (click)="registrar(userMail.value, userClave.value)">Registrarse</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
     </form>
     

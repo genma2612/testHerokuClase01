@@ -1,5 +1,4 @@
 import { Injectable, NgZone } from '@angular/core';
-import Swal from 'sweetalert2'
 import { User } from '../Servicios/user';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -9,6 +8,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { FirebaseError } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +42,11 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['/bienvenida']);
+            console.info(user);
           }
         });
-      })
-      .catch((error) => {
-        window.alert(error.message);
+      }).catch((error) => {
+        throw new FirebaseError(error.code, error.message);
       });
   }
   // Sign up with email/password
@@ -59,10 +58,9 @@ export class AuthService {
         up and returns promise */
         //this.SendVerificationMail(); Sin verificación de e-mail
         this.SetUserData(result.user);
-        this.router.navigate(['/bienvenida']);
       })
       .catch((error) => {
-        window.alert(error.message);
+        throw new FirebaseError(error.code, error.message);
       });
   }
   // Send email verfificaiton when new user sign up
@@ -94,8 +92,10 @@ export class AuthService {
     get userName(): string {
     const user = JSON.parse(localStorage.getItem('user')!);
     return user.email;
-  //  Sin verificacion
-  //  return user !== null && user.emailVerified !== false ? true : false;
+  }
+  get userLoginDate(): string {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user.lastLoginTime;
   }
   // Sign in with Google
   GoogleAuth() {
@@ -122,10 +122,12 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
+    let usuario:any = JSON.parse(localStorage.getItem('user')!);
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
+      displayName: 'nombreDeUsuario',
+      //displayName: user.displayName,
       photoURL: user.photoURL,
       //emailVerified: user.emailVerified,
     };
